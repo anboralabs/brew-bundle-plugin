@@ -45,6 +45,32 @@
 //   * rules are PascalCase: StructItem
 //   * recovery related rules are PascalCase_with_snake_suffix: Item_recover
 
-File ::= FileStructure
+File ::= item_*
 
-private FileStructure ::=
+private item_ ::= (TapProperty | CaskArgsProperty | BrewProperty | MasProperty | WhaleBrewProperty)
+
+TapProperty ::= tap <<comma_sep_items (StringLit &(','|Property))>>
+
+CaskArgsProperty ::= cask_args <<comma_sep_items (Property &(','|))>>
+
+BrewProperty ::= brew <<comma_sep_items (StringLit &(','|Property))>>
+
+MasProperty ::= mas <<comma_sep_items (StringLit &(','|Property))>>
+
+WhaleBrewProperty ::= whalebrew <<comma_sep_items (StringLit &(','|Property))>>
+
+Property ::= [] PropertyName ':' value {pin=1 recoverWhile=recover}
+
+PropertyName ::= IDENTIFIER
+private recover ::= !(',' | ']' | '}' | '[' | '{')
+
+json ::= array | object  { hooks=[wsBinders="null, null"] }
+value ::= BOOL_LITERAL | StringLit | ENVIRONMENT | NUMBER_LITERAL | json {name="value"}
+
+array ::= '[' [!']' item (!']' ',' item) *] ']' {pin(".*")=1 extends=json}
+private item ::= StringLit | json {recoverWhile=recover}
+object ::= '{' [!'}' Property (!'}' ',' Property) *] '}' {pin(".*")=1 extends=json}
+
+StringLit ::= STRING_LITERAL
+
+private meta comma_sep_items ::= <<param>> ( ',' <<param>> )* ','?

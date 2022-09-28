@@ -27,7 +27,24 @@ tasks {
         sourceCompatibility = "11"
         targetCompatibility = "11"
     }
+
+    val generateBrewLexer = task<org.jetbrains.grammarkit.tasks.GenerateLexerTask>("generateBrewLexer") {
+        source.set("src/main/grammar/BrewBundle.flex")
+        targetDir.set("src/main/gen/co/anbora/labs/brewbundle/lang/")
+        targetClass.set("FirebaseRulesLexer")
+        purgeOldFiles.set(true)
+    }
+
+    val generateBrewParser = task<org.jetbrains.grammarkit.tasks.GenerateParserTask>("generateBrewParser") {
+        source.set("src/main/grammar/BrewBundle.bnf")
+        targetRoot.set("src/main/gen")
+        pathToParser.set("/co/anbora/labs/brewbundle/lang/core/parser/BrewParser.java")
+        pathToPsiRoot.set("/co/anbora/labs/brewbundle/lang/core/psi")
+        purgeOldFiles.set(true)
+    }
+
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        dependsOn(generateBrewLexer, generateBrewParser)
         kotlinOptions.jvmTarget = "11"
     }
 
