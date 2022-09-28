@@ -47,13 +47,15 @@
 
 File ::= item_*
 
-private item_ ::= (TapProperty | CaskArgsProperty | BrewProperty | MasProperty | WhaleBrewProperty)
+private item_ ::= (TapProperty | CaskArgsProperty | BrewProperty | CaskProperty | MasProperty | WhaleBrewProperty)
 
 TapProperty ::= tap <<comma_sep_items (StringLit &(','|Property))>>
 
-CaskArgsProperty ::= cask_args <<comma_sep_items (Property &(','|))>>
+CaskArgsProperty ::= 'cask_args' <<comma_sep_items (Property &(','|))>>
 
 BrewProperty ::= brew <<comma_sep_items (StringLit &(','|Property))>>
+
+CaskProperty ::= cask <<comma_sep_items (StringLit &(','|Property))>>
 
 MasProperty ::= mas <<comma_sep_items (StringLit &(','|Property))>>
 
@@ -65,12 +67,14 @@ PropertyName ::= IDENTIFIER
 private recover ::= !(',' | ']' | '}' | '[' | '{')
 
 json ::= array | object  { hooks=[wsBinders="null, null"] }
-value ::= BOOL_LITERAL | StringLit | ENVIRONMENT | NUMBER_LITERAL | json {name="value"}
+value ::= BOOL_LITERAL | StringLit | ENVIRONMENT | NUMBER_LITERAL | UnlessLit | json {name="value"}
 
 array ::= '[' [!']' item (!']' ',' item) *] ']' {pin(".*")=1 extends=json}
 private item ::= StringLit | json {recoverWhile=recover}
 object ::= '{' [!'}' Property (!'}' ',' Property) *] '}' {pin(".*")=1 extends=json}
 
 StringLit ::= STRING_LITERAL
+
+UnlessLit ::= unless IDENTIFIER StringLit
 
 private meta comma_sep_items ::= <<param>> ( ',' <<param>> )* ','?
