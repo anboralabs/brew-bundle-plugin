@@ -11,6 +11,7 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-
+        <fileType name="Brew Bundle" implementationClass="co.anbora.labs.brewbundle.lang.BrewBundleFileType"
+                  fieldName="INSTANCE" language="brew_bundle" fileNames="Brewfile"/>
     </extensions>
 </idea-plugin>
