@@ -1,0 +1,50 @@
+// Copyright 2000-2020 JetBrains s.r.o. and other contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+{
+  parserClass="co.anbora.labs.brewbundle.lang.core.parser.BrewParser"
+  psiClassPrefix="Brew"
+  psiImplClassSuffix="Impl"
+
+  implements="co.anbora.labs.brewbundle.lang.core.psi.BrewElement"
+  extends="co.anbora.labs.brewbundle.lang.core.psi.BrewElementImpl"
+
+  psiPackage="co.anbora.labs.brewbundle.lang.core.psi"
+  psiImplPackage="co.anbora.labs.brewbundle.lang.core.psi.impl"
+  parserUtilClass="co.anbora.labs.brewbundle.lang.core.util.BrewParserUtil"
+
+  elementTypeHolderClass="co.anbora.labs.brewbundle.lang.core.psi.BrewTypes"
+
+  elementTypeClass="co.anbora.labs.brewbundle.lang.core.BrewElementType"
+  tokenTypeClass="co.anbora.labs.brewbundle.lang.core.BrewTokenType"
+
+  tokens = [
+    WHITESPACE       ='regexp:[ \n\t\r\f]'
+
+    BOOL_LITERAL     ='regexp:(true)|(false)'
+    NUMBER_LITERAL   ='regexp:\d+(\.\d*)?'
+    STRING_LITERAL   ="regexp:('([^'\\]|\\.)*'|\"([^\"\\]|\\.)*\")"
+
+    IDENTIFIER       ='regexp:[\-_a-zA-Z0-9]+'
+    ENVIRONMENT      ='regexp::[\-_a-zA-Z0-9]+'
+
+    L_BRACE          =  '{'
+    R_BRACE          =  '}'
+    L_BRACK          =  '['
+    R_BRACK          =  ']'
+    COLON            =  ':'
+    COMMA            =  ','
+    DOT              =  '.'
+
+    SYSTEM           = 'system_kw'
+
+  ]
+}
+
+// Naming convention:
+//
+//   * tokens are lowercase: for, if, identifier
+//   * rules are PascalCase: StructItem
+//   * recovery related rules are PascalCase_with_snake_suffix: Item_recover
+
+File ::= FileStructure
+
+private FileStructure ::=
