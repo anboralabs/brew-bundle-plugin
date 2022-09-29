@@ -13,6 +13,8 @@
     <extensions defaultExtensionNs="com.intellij">
         <fileType name="Brew Bundle" implementationClass="co.anbora.labs.brewbundle.lang.BrewBundleFileType"
                   fieldName="INSTANCE" language="brew_bundle" fileNames="Brewfile"/>
+        <lang.parserDefinition language="brew_bundle"
+                               implementationClass="co.anbora.labs.brewbundle.lang.BrewParserDefinition"/>
         <lang.commenter language="brew_bundle" implementationClass="co.anbora.labs.brewbundle.ide.commenter.BrewCommenter"/>
     </extensions>
 </idea-plugin>

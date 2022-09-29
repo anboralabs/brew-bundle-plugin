@@ -1,6 +1,8 @@
 package co.anbora.labs.brewbundle.lang.core
 
 import co.anbora.labs.brewbundle.lang.BrewBundleLanguage
+import co.anbora.labs.brewbundle.lang.BrewParserDefinition.Companion.EOL_COMMENT
+import co.anbora.labs.brewbundle.lang.BrewParserDefinition.Companion.EOL_DOC_COMMENT
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.TokenSet
 
@@ -21,6 +23,6 @@ val RULES_PERMISSIONS = tokenSetOf(
 
 val TYPES = tokenSetOf(
         BOOL, INT, FLOAT, NUMBER, STRING, LIST, MAP, TIMESTAMP, DURATION, PATH, LATLNG
-)
+)*/
 
-val FIREBASE_COMMENTS = tokenSetOf(BLOCK_COMMENT, EOL_COMMENT, EOL_DOC_COMMENT)*/
+val BREW_COMMENTS = tokenSetOf(EOL_COMMENT, EOL_DOC_COMMENT)

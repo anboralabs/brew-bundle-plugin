@@ -49,17 +49,21 @@ File ::= item_*
 
 private item_ ::= (TapProperty | CaskArgsProperty | BrewProperty | CaskProperty | MasProperty | WhaleBrewProperty)
 
-TapProperty ::= tap <<comma_sep_items (StringLit &(','|Property))>>
+TapProperty ::= tap <<comma_sep_items (StringLitOrProperty &(','|StringLitOrProperty))>> {pin=1 recoverWhile=recover_item}
 
-CaskArgsProperty ::= 'cask_args' <<comma_sep_items (Property &(','|))>>
+CaskArgsProperty ::= CASK_ARGS <<comma_sep_items (Property &(','|Property))>> {pin=1 recoverWhile=recover_item}
 
-BrewProperty ::= brew <<comma_sep_items (StringLit &(','|Property))>>
+BrewProperty ::= brew <<comma_sep_items (StringLitOrProperty &(','|StringLitOrProperty))>> {pin=1 recoverWhile=recover_item}
 
-CaskProperty ::= cask <<comma_sep_items (StringLit &(','|Property))>>
+CaskProperty ::= cask <<comma_sep_items (StringLitOrProperty &(','|StringLitOrProperty))>> {pin=1 recoverWhile=recover_item}
 
-MasProperty ::= mas <<comma_sep_items (StringLit &(','|Property))>>
+MasProperty ::= mas <<comma_sep_items (StringLitOrProperty &(','|StringLitOrProperty))>> {pin=1 recoverWhile=recover_item}
 
-WhaleBrewProperty ::= whalebrew <<comma_sep_items (StringLit &(','|Property))>>
+WhaleBrewProperty ::= whalebrew <<comma_sep_items (StringLitOrProperty &(','|StringLitOrProperty))>> {pin=1 recoverWhile=recover_item}
+
+private recover_item ::= !(tap | CASK_ARGS | brew | cask | mas | whalebrew)
+
+private StringLitOrProperty ::= StringLit | Property
 
 Property ::= [] PropertyName ':' value {pin=1 recoverWhile=recover}
 

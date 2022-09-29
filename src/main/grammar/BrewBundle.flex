@@ -28,16 +28,6 @@ import static co.anbora.labs.brewbundle.lang.BrewParserDefinition.*;
   public BrewLexer() {
     this(null);
   }
-
-  IElementType imbueBlockComment() {
-      assert(zzNestedCommentLevel == 0);
-      yybegin(YYINITIAL);
-
-      zzStartRead = zzPostponedMarkedPos;
-      zzPostponedMarkedPos = -1;
-
-      return BLOCK_COMMENT;
-  }
 %}
 
 %public
