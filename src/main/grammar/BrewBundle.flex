@@ -44,13 +44,14 @@ import static co.anbora.labs.brewbundle.lang.BrewParserDefinition.*;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 EOL_WS           = \n | \r | \r\n
 LINE_WS          = [\ \t]
-WHITE_SPACE_CHAR = {EOL_WS} | {LINE_WS}
+WHITE_SPACE_CHAR = {LINE_WS}
 WHITE_SPACE      = {WHITE_SPACE_CHAR}+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Comments
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-EOL_DOC_LINE  = {LINE_WS}*("#".*)
+EOL_DOC_LINE  = {LINE_WS}*("#".*) {EOL_WS}?
+LINE_COMMENT = "#"[^\r\n]* {EOL_WS}?
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Literals
@@ -64,8 +65,9 @@ ENV=:{IDENTIFIER}
 %%
 
 <YYINITIAL> {
+      {EOL_WS}+            { return LINE_TERMINATOR; }
       {WHITE_SPACE}        { return WHITE_SPACE; }
-      "#" .*               { return EOL_COMMENT; }
+      {LINE_COMMENT}       { return EOL_COMMENT; }
 }
 
 <YYINITIAL> {

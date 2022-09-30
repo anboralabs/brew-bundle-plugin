@@ -17,8 +17,6 @@
   tokenTypeClass="co.anbora.labs.brewbundle.lang.core.BrewTokenType"
 
   tokens = [
-    WHITESPACE       ='regexp:[ \n\t\r\f]'
-
     BOOL_LITERAL     ='regexp:(true)|(false)'
     NUMBER_LITERAL   ='regexp:\d+(\.\d*)?'
     STRING_LITERAL   ="regexp:('([^'\\]|\\.)*'|\"([^\"\\]|\\.)*\")"
@@ -45,33 +43,37 @@
 //   * rules are PascalCase: StructItem
 //   * recovery related rules are PascalCase_with_snake_suffix: Item_recover
 
-File ::= item_*
+File ::= !<<eof>> item_* {pin=1 recoverWhile=recover_any}
+private recover_any ::= !(item_)
 
-private item_ ::= (TapProperty | CaskArgsProperty | BrewProperty | CaskProperty | MasProperty | WhaleBrewProperty)
+private item_ ::= (TapProperty | CaskArgsProperty | BrewProperty | CaskProperty | MasProperty | WhaleBrewProperty) EndLine
 
-TapProperty ::= tap <<comma_sep_items (StringLitOrProperty &(','|StringLitOrProperty))>> {pin=1 recoverWhile=recover_item}
+TapProperty ::= tap CommandProperty {pin=1}
 
-CaskArgsProperty ::= CASK_ARGS <<comma_sep_items (Property &(','|Property))>> {pin=1 recoverWhile=recover_item}
+CaskArgsProperty ::= CASK_ARGS CommandProperty {pin=1}
 
-BrewProperty ::= brew <<comma_sep_items (StringLitOrProperty &(','|StringLitOrProperty))>> {pin=1 recoverWhile=recover_item}
+BrewProperty ::= brew CommandProperty {pin=1}
 
-CaskProperty ::= cask <<comma_sep_items (StringLitOrProperty &(','|StringLitOrProperty))>> {pin=1 recoverWhile=recover_item}
+CaskProperty ::= cask CommandProperty {pin=1}
 
-MasProperty ::= mas <<comma_sep_items (StringLitOrProperty &(','|StringLitOrProperty))>> {pin=1 recoverWhile=recover_item}
+MasProperty ::= mas CommandProperty {pin=1}
 
-WhaleBrewProperty ::= whalebrew <<comma_sep_items (StringLitOrProperty &(','|StringLitOrProperty))>> {pin=1 recoverWhile=recover_item}
+WhaleBrewProperty ::= whalebrew CommandProperty {pin=1}
 
-private recover_item ::= !(tap | CASK_ARGS | brew | cask | mas | whalebrew)
+private CommandProperty ::= [!EndLine StringLitOrProperty (!EndLine ',' StringLitOrProperty) *] {pin(".*")=1}
 
-private StringLitOrProperty ::= StringLit | Property
+//private StringLitOrProperty ::= (StringLit | Property) UnlessLit?
+private StringLitOrProperty ::= <<comma_sep_items ((StringLit | Property) UnlessLit? &(','|EndLine))>>
+
+private EndLine ::= LINE_TERMINATOR | <<eof>>
 
 Property ::= [] PropertyName ':' value {pin=1 recoverWhile=recover}
 
 PropertyName ::= IDENTIFIER
-private recover ::= !(',' | ']' | '}' | '[' | '{')
+private recover ::= !(',' | ']' | '}' | '[' | '{' | LINE_TERMINATOR)
 
 json ::= array | object  { hooks=[wsBinders="null, null"] }
-value ::= BOOL_LITERAL | StringLit | ENVIRONMENT | NUMBER_LITERAL | UnlessLit | json {name="value"}
+value ::= BOOL_LITERAL | StringLit | ENVIRONMENT | NUMBER_LITERAL | json {name="value"}
 
 array ::= '[' [!']' item (!']' ',' item) *] ']' {pin(".*")=1 extends=json}
 private item ::= StringLit | json {recoverWhile=recover}
