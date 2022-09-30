@@ -3,6 +3,7 @@ package co.anbora.labs.brewbundle.lang.core
 import co.anbora.labs.brewbundle.lang.BrewBundleLanguage
 import co.anbora.labs.brewbundle.lang.BrewParserDefinition.Companion.EOL_COMMENT
 import co.anbora.labs.brewbundle.lang.BrewParserDefinition.Companion.EOL_DOC_COMMENT
+import co.anbora.labs.brewbundle.lang.core.psi.BrewTypes.*
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.TokenSet
 
@@ -10,14 +11,12 @@ class BrewTokenType(debugName: String) : IElementType(debugName, BrewBundleLangu
 
 fun tokenSetOf(vararg tokens: IElementType) = TokenSet.create(*tokens)
 
-/*val KEYWORDS = tokenSetOf(
-        RULES_VERSION, REQUEST, RESOURCE, NULL,
-        IF, IN, IS,
-        LET, RETURN,
-        MATCH, SERVICE, FUNCTION, ALLOW
+val KEYWORDS = tokenSetOf(
+    TAP, CASK_ARGS, BREW, CASK,
+    UNLESS, MAS, WHALEBREW
 )
 
-val RULES_PERMISSIONS = tokenSetOf(
+/*val RULES_PERMISSIONS = tokenSetOf(
         CREATE, DELETE, EXITS, GET, READ, UPDATE, WRITE, LIST
 )
 

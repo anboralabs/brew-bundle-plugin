@@ -15,6 +15,10 @@
                   fieldName="INSTANCE" language="brew_bundle" fileNames="Brewfile"/>
         <lang.parserDefinition language="brew_bundle"
                                implementationClass="co.anbora.labs.brewbundle.lang.BrewParserDefinition"/>
+        <lang.syntaxHighlighterFactory language="brew_bundle"
+                                       implementationClass="co.anbora.labs.brewbundle.ide.highlight.BrewSyntaxHighlighterFactory"/>
         <lang.commenter language="brew_bundle" implementationClass="co.anbora.labs.brewbundle.ide.commenter.BrewCommenter"/>
+        <colorSettingsPage implementation="co.anbora.labs.brewbundle.ide.color.BrewBundleColorSettingPage"/>
+
     </extensions>
 </idea-plugin>
