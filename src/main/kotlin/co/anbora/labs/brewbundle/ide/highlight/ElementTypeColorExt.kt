@@ -1,6 +1,7 @@
 package co.anbora.labs.brewbundle.ide.highlight
 
 import co.anbora.labs.brewbundle.ide.color.BrewBundleColors
+import co.anbora.labs.brewbundle.lang.core.BREW_COMMENTS
 import co.anbora.labs.brewbundle.lang.core.KEYWORDS
 import co.anbora.labs.brewbundle.lang.core.psi.BrewTypes.*
 import com.intellij.openapi.editor.colors.TextAttributesKey
@@ -14,6 +15,7 @@ private fun map(tokenType: IElementType?): BrewBundleColors? {
         in KEYWORDS, BOOL_LITERAL -> BrewBundleColors.KEY_WORD
         ENVIRONMENT -> BrewBundleColors.ENVIRONMENT
         STRING_LITERAL -> BrewBundleColors.STRINGS
+        in BREW_COMMENTS -> BrewBundleColors.COMMENTS
         IDENTIFIER -> BrewBundleColors.OPTIONS
         COLON -> BrewBundleColors.COLON
         DOT -> BrewBundleColors.DOT
