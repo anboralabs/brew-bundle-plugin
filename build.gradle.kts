@@ -46,6 +46,18 @@ tasks {
         targetRoot.set("src/main/gen")
         pathToParser.set("/co/anbora/labs/brewbundle/lang/core/parser/BrewParser.java")
         pathToPsiRoot.set("/co/anbora/labs/brewbundle/lang/core/psi")
+        sourceFile.convention(source.map {
+            project.layout.projectDirectory.file(it)
+        })
+        targetRootOutputDir.convention(targetRoot.map {
+            project.layout.projectDirectory.dir(it)
+        })
+        parserFile.convention(pathToParser.map {
+            project.layout.projectDirectory.file("${targetRoot.get()}/$it")
+        })
+        psiDir.convention(pathToPsiRoot.map {
+            project.layout.projectDirectory.dir("${targetRoot.get()}/$it")
+        })
         purgeOldFiles.set(true)
     }
 
