@@ -22,7 +22,7 @@ sourceSets {
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
     version.set("LATEST-EAP-SNAPSHOT")
-    type.set("IC") // Target IDE Platform
+    type.set("IU") // Target IDE Platform
 
     plugins.set(listOf(/* Plugin Dependencies */))
 }
