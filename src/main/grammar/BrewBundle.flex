@@ -76,6 +76,8 @@ ENV=:{IDENTIFIER}
     "}"                        { return R_BRACE; }
     "["                        { return L_BRACK; }
     "]"                        { return R_BRACK; }
+    //"&"                        { return AND; }
+    //"|"                        { return OR; }
     ":"                        { return COLON; }
     ","                        { return COMMA; }
     "."                        { return DOT; }
@@ -101,4 +103,4 @@ ENV=:{IDENTIFIER}
     {IDENTIFIER}               { return IDENTIFIER; }
 }
 
-[^] { return BAD_CHARACTER; }
+[^] { return IDENTIFIER; }
