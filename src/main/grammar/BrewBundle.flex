@@ -103,4 +103,4 @@ ENV=:{IDENTIFIER}
     {IDENTIFIER}               { return IDENTIFIER; }
 }
 
-[^] { return IDENTIFIER; }
+[^] { return OTHER_IDENTIFIER; }
