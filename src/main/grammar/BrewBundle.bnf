@@ -31,6 +31,11 @@
     COLON            =  ':'
     COMMA            =  ','
     DOT              =  '.'
+    QUESTION_MARK    =  '?'
+    L_PAREN          =  '('
+    R_PAREN          =  ')'
+    DOUBLE_QUOTE     =  '\"'
+    SINGLE_QUOTE     =  "\'"
 
     SYSTEM           = 'system_kw'
 

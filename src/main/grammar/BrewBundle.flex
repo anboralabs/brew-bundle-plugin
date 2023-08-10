@@ -79,6 +79,11 @@ ENV=:{IDENTIFIER}
     ":"                        { return COLON; }
     ","                        { return COMMA; }
     "."                        { return DOT; }
+    "?"                        { return QUESTION_MARK; }
+    "("                        { return L_PAREN; }
+    ")"                        { return R_PAREN; }
+    "\""                       { return DOUBLE_QUOTE; }
+    "\'"                       { return SINGLE_QUOTE; }
 
     // keywords
     "tap"                      { return TAP; }

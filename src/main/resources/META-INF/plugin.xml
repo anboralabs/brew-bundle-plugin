@@ -13,12 +13,11 @@
     <extensions defaultExtensionNs="com.intellij">
         <fileType name="Brew Bundle" implementationClass="co.anbora.labs.brewbundle.lang.BrewBundleFileType"
                   fieldName="INSTANCE" language="brew_bundle" fileNames="Brewfile"/>
-        <lang.parserDefinition language="brew_bundle"
-                               implementationClass="co.anbora.labs.brewbundle.lang.BrewParserDefinition"/>
         <lang.syntaxHighlighterFactory language="brew_bundle"
                                        implementationClass="co.anbora.labs.brewbundle.ide.highlight.BrewSyntaxHighlighterFactory"/>
         <lang.commenter language="brew_bundle" implementationClass="co.anbora.labs.brewbundle.ide.commenter.BrewCommenter"/>
+        <lang.braceMatcher language="brew_bundle" implementationClass="co.anbora.labs.brewbundle.ide.typing.BrewBraceMatcher"/>
+        <quoteHandler fileType="brew_bundle" className="co.anbora.labs.brewbundle.ide.editor.BrewQuoteHandler"/>
         <colorSettingsPage implementation="co.anbora.labs.brewbundle.ide.color.BrewBundleColorSettingPage"/>
-
     </extensions>
 </idea-plugin>
