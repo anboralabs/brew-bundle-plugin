@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "co.anbora.labs"
-version = "1.3.9"
+version = "1.4.0"
 
 repositories {
     mavenCentral()
@@ -28,6 +28,10 @@ intellij {
 }
 
 tasks {
+
+    buildSearchableOptions {
+        enabled = false
+    }
     // Set the JVM compatibility versions
     withType<JavaCompile> {
         sourceCompatibility = "17"
