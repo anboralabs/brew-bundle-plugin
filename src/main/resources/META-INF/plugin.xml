@@ -3,6 +3,8 @@
     <name>Brew Bundle</name>
     <vendor email="anboralabs@gmail.com" url="https://labs.anbora.co">Anbora-labs</vendor>
 
+    <product-descriptor code="PBREWBUNDLE" release-date="20230821" release-version="20231"/>
+
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
