@@ -1,9 +1,9 @@
 <idea-plugin>
     <id>co.anbora.labs.brew-bundle</id>
     <name>Brew Bundle</name>
-    <vendor email="anboralabs@gmail.com" url="https://labs.anbora.co">Anbora-labs</vendor>
+    <vendor email="support@anbora.co" url="https://labs.anbora.co">Anbora-labs</vendor>
 
-    <product-descriptor code="PBREWBUNDLE" release-date="20240120" release-version="20241"/>
+    <product-descriptor code="PBREWBUNDLE" release-date="20250116" release-version="20251"/>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
@@ -21,5 +21,7 @@
         <lang.braceMatcher language="brew_bundle" implementationClass="co.anbora.labs.brewbundle.ide.typing.BrewBraceMatcher"/>
         <quoteHandler fileType="brew_bundle" className="co.anbora.labs.brewbundle.ide.editor.BrewQuoteHandler"/>
         <colorSettingsPage implementation="co.anbora.labs.brewbundle.ide.color.BrewBundleColorSettingPage"/>
+
+        <postStartupActivity implementation="co.anbora.labs.brewbundle.ide.startup.LicenseStartup" />
     </extensions>
 </idea-plugin>

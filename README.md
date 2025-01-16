@@ -2,8 +2,8 @@
 
 # Brew-Bundle
 
-![Locked-ks](/images/brew_bundle_1.png)
-![Unlocked-ks](/images/brew_bundle_2.png)
+![brew](/images/brew_bundle_1.png)
+![brew](/images/brew_bundle_2.png)
 
 ## What is it?
 
@@ -12,7 +12,7 @@ Brew Bundle is a plugin to highlight syntax in brew bundle files
 ## How to use it?
 
 - Add plugin to Intellij IDE
-- Open a keystore file
+- Create a nu file
 
 ### Add plugin to Intellij IDE
 
