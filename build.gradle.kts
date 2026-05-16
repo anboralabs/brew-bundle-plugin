@@ -3,9 +3,9 @@ fun environment(key: String) = providers.environmentVariable(key)
 
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "2.2.0"
-    id("org.jetbrains.intellij.platform") version "2.11.0"
-    id("org.jetbrains.grammarkit") version "2023.3.0.1"
+    id("org.jetbrains.kotlin.jvm") version "2.3.20"
+    id("org.jetbrains.intellij.platform") version "2.16.0"
+    id("org.jetbrains.intellij.platform.grammarkit") version "2.16.0"
 }
 
 group = properties("pluginGroup").get()
@@ -13,7 +13,7 @@ version = properties("pluginVersion").get()
 
 // Set the JVM language level used to build the project.
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(25)
 }
 
 // Configure project's dependencies
@@ -106,21 +106,19 @@ tasks {
         gradleVersion = properties("gradleVersion").get()
     }
 
-    val generateBrewLexer = task<org.jetbrains.grammarkit.tasks.GenerateLexerTask>("generateBrewLexer") {
+    generateLexer {
         sourceFile.set(file("src/main/grammar/BrewBundle.flex"))
-        targetOutputDir.set(file("src/main/gen/co/anbora/labs/brewbundle/lang/"))
+        targetRootOutputDir.set(file("src/main/gen"))
         purgeOldFiles.set(true)
     }
 
-    val generateBrewParser = task<org.jetbrains.grammarkit.tasks.GenerateParserTask>("generateBrewParser") {
+    generateParser {
         sourceFile.set(file("src/main/grammar/BrewBundle.bnf"))
         targetRootOutputDir.set(file("src/main/gen"))
-        pathToParser.set("/co/anbora/labs/brewbundle/lang/core/parser/BrewParser.java")
-        pathToPsiRoot.set("/co/anbora/labs/brewbundle/lang/core/psi")
-        purgeOldFiles.set(true)
+        purgeOldFiles.set(false)
     }
 
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        dependsOn(generateBrewLexer, generateBrewParser)
+        dependsOn("generateLexer", "generateParser")
     }
 }
