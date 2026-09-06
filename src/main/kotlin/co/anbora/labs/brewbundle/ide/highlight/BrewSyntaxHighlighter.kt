@@ -10,6 +10,6 @@ class BrewSyntaxHighlighter: SyntaxHighlighterBase() {
     override fun getHighlightingLexer(): Lexer = BrewBundleLexer()
 
     override fun getTokenHighlights(
-        tokenType: IElementType?
+        tokenType: IElementType
     ): Array<TextAttributesKey> = pack(tokenType.textAttributesKey())
 }
